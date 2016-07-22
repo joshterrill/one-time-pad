@@ -2,7 +2,7 @@
 
 a simple one-time pad cipher written in nodejs
 
-#### usage
+### usage
 
 ```
 var pad = require("one-time-pad");
@@ -12,3 +12,5 @@ console.log(encryptedMessage); // RBAJQFHFKLTBN
 var decryptedMessage = pad.decrypt("RBAJQFHFKLTBN", "ZXYSMMVBSTTVJ");
 console.log(decryptedMessage); // SECRETMESSAGE
 ```
+
+LICENSE: MIT
