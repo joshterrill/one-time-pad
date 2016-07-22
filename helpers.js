@@ -102,10 +102,6 @@ exports.legend = [
   {
     'letter': 'Z',
     'value': 26
-  },
-  {
-    'letter': ' ',
-    'value': 0
   }
 ];
 

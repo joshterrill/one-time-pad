@@ -1,6 +1,6 @@
 {
   "name": "one-time-pad",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "a simple one-time pad cipher written in nodejs",
   "main": "index.js",
   "scripts": {

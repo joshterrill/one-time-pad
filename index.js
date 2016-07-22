@@ -7,8 +7,9 @@ var reverse = require("./helpers").reverse;
 exports.encrypt = function(message, key) {
   // start empty string to add message to
   var encryptedMessage = "";
-  // convert message to uppercase and strip out spaces
+  // convert message and key to uppercase and strip out spaces
   message = message.replace(/\s/g, "").toUpperCase();
+  key = key.replace(/\s/g, "").toUpperCase();
   // start looping through the letters in the message
   for (var i = 0; i < message.length; i++) {
     // numeric value for message letters
@@ -17,7 +18,7 @@ exports.encrypt = function(message, key) {
     var valueKey = search(key[i], legend);
     // if the key isn't long enough, append the letter in the same
     // position as the message to the string
-    if (typeof valueString === "undefined") {
+    if (typeof valueString === "undefined" || typeof valueKey === "undefined") {
       encryptedMessage += message[i]
     } else {
       // add value of message to value of key minus 1
@@ -38,15 +39,14 @@ exports.encrypt = function(message, key) {
 exports.decrypt = function(message, key) {
   var encryptedMessage = "";
   message = message.replace(/\s/g, "").toUpperCase();
-  //console.log(message);
+  key = key.replace(/\s/g, "").toUpperCase();
   for (var i = 0; i < message.length; i++) {
     var valueString = search(message[i], legend);
     var valueKey = search(key[i], legend);
-    if (typeof valueString === "undefined") {
+    if (typeof valueString === "undefined" || typeof valueKey === "undefined") {
       encryptedMessage += message[i]
     } else {
       var reverseValue = valueString - valueKey + 1;
-      //console.log(reverseValue)
       if (reverseValue < 0) {
         reverseValue = reverseValue + 26;
       }
