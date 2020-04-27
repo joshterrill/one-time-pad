@@ -1,42 +1,46 @@
-var search = require("./helpers").search;
-var reverse = require("./helpers").reverse;
-var mod = require("./helpers").mod;
+const { search, reverse, mod } = require("./helpers");
 
 function encrypt(message, key) {
-    var encryptedMessage = "";
+    let encryptedMessage = "";
     message = message.replace(/\s/g, "").toUpperCase();
     key = key.replace(/\s/g, "").toUpperCase();
-    for (var i = 0; i < message.length; i++) {
-        var valueString = search(message[i]);
-        var valueKey = search(key[i]);
-        var intString = typeof valueString === 'undefined' ? parseInt(message[i]) : valueString
-        var intKey = typeof valueKey === 'undefined' ? parseInt(key[i]) : valueKey
-        if(isNaN(intString) || isNaN(intKey)){
-        encryptedMessage += message[i]
+    for (let i = 0; i < message.length; i++) {
+        const valueString = search(message[i]);
+        const valueKey = search(key[i]);
+        const intString = typeof valueString === "undefined" ? parseInt(message[i]) : valueString
+        const intKey = typeof valueKey === "undefined" ? parseInt(key[i]) : valueKey
+        if (isNaN(intString) || isNaN(intKey)) {
+            encryptedMessage += message[i];
         } else {
-        var reverseValue = mod(intString + intKey);
-        var reverseLookup = reverse(reverseValue);
-        encryptedMessage += reverseLookup;
+            const reverseValue = mod(intString + intKey);
+            const reverseLookup = reverse(reverseValue);
+            if (reverseLookup == 0) {
+                reverseLookup = "";
+            }
+            encryptedMessage += reverseLookup;
         }
     }
     return encryptedMessage;
 }
 
 function decrypt(message, key) {
-    var encryptedMessage = "";
+    let encryptedMessage = "";
     message = message.replace(/\s/g, "").toUpperCase();
     key = key.replace(/\s/g, "").toUpperCase();
-    for (var i = 0; i < message.length; i++) {
-        var valueString = search(message[i]);
-        var valueKey = search(key[i]);
-        var intString = typeof valueString === 'undefined' ? parseInt(message[i])  : valueString
-        var intKey = typeof valueKey === 'undefined' ? parseInt(key[i]) : valueKey
-        if(isNaN(intString) || isNaN(intKey)){
-        encryptedMessage += message[i]
+    for (let i = 0; i < message.length; i++) {
+        const valueString = search(message[i]);
+        const valueKey = search(key[i]);
+        const intString = typeof valueString === "undefined" ? parseInt(message[i]) : valueString
+        const intKey = typeof valueKey === "undefined" ? parseInt(key[i]) : valueKey
+        if (isNaN(intString) || isNaN(intKey)) {
+            encryptedMessage += message[i]
         } else {
-        var reverseValue = mod(intString - intKey);
-        var reverseLookup = reverse(reverseValue);
-        encryptedMessage += reverseLookup;
+            const reverseValue = mod(intString - intKey);
+            let reverseLookup = reverse(reverseValue);
+            if (reverseLookup == 0) {
+                reverseLookup = "";
+            }
+            encryptedMessage += reverseLookup;
         }
     }
     return encryptedMessage;
